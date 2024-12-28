@@ -1,6 +1,7 @@
 import Home from "../views/HomeView.vue";
 import Catalog from "../views/CatalogView.vue";
 import Admin from "../views/AdminView.vue";
+import Edit from "../views/EditView.vue"
 
 
 const routes = [
@@ -19,6 +20,11 @@ const routes = [
         component: Admin,
         name: "Админ-Панель",
     },
+    {
+        path: "/admin/edit",
+        component: Edit,
+        name: "Редактирование товара",
+    }
 
 ];
 

@@ -1,13 +1,15 @@
 <template>
-  <div class="CreateForm">
-    <form action="" @submit.prevent="this.postData()" ref="ProductForm">
+  <div class="content">
+    <h1>Редактирование продукта №{{ this.$route.query.id }}</h1>
+    <form action="" @submit.prevent="this.updateData()" ref="ProductForm">
       <input
         type="text"
         placeholder="Название продукта"
         v-model="formData.name"
+        value=""
       />
       <input type="text" placeholder="Цена продукта" v-model="formData.price" />
-      <input 
+      <input
         type="text"
         placeholder="Путь к изображению продукта"
         v-model="formData.img"
@@ -16,14 +18,7 @@
         placeholder="Oписание продукта"
         v-model="formData.description"
       />
-      <input
-        type="submit"
-        class="btn btn-success"
-        value="Отправить"
-        @click.once="this.reload_page()"
-        v-on:click="this.CloseAddForm()"
-      />
-      <div class="btn btn-danger" @click="this.CloseAddForm()">Закрыть</div>
+      <input type="submit" class="btn btn-primary" value="Сохранить"/>
     </form>
   </div>
 </template>
@@ -33,39 +28,49 @@ import axios from "axios";
 export default {
   data() {
     return {
-      SAP_state: false,
       formData: {
-        name: "",
-        price: "",
-        img: "",
-        description: "",
+
       },
-      reloadState: 1,
     };
   },
   methods: {
-    reload_page() {
-      this.$emit("update:products", this.reloadState);
-    },
-    CloseAddForm() {
-      this.$emit("update:adding", this.SAP_state);
-    },
-    async postData() {
+    async getProduct() {
       try {
-        const response = await axios.post(
-          "http://0.0.0.0/api/products",
-          this.formData
-        );
-        console.log(response);
+        await axios
+          .get("http://0.0.0.0/api/products/" + this.$route.query.id)
+          .then((response) => {
+            this.formData = response.data;
+          });
       } catch (error) {
         console.log(error);
       }
     },
+   async updateData() {
+      try {
+        const response = await axios.put(
+          "http://0.0.0.0/api/products/" + this.$route.query.id,
+          this.formData
+        );
+        console.log(response);
+        this.$router.push('/admin');
+      } catch (error) {
+        console.log(error);
+      }
+    }
   },
+  mounted(){
+    this.getProduct();
+  }
 };
 </script>
 
 <style scoped>
+.content {
+  width: 100%;
+}
+form {
+  width: 500px;
+}
 .btn {
   max-height: 40px;
 }

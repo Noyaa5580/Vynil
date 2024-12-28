@@ -20,7 +20,7 @@ class ApiController extends Controller
 
     public function store(Request $request)
     {
-        
+
         \DB::table('products')->insert($request->all());
         return response()->json(['status' => 'sucsess', 200]);
     }
@@ -36,8 +36,13 @@ class ApiController extends Controller
         if ($result) {
             return ['result' => 'data updated'];
         } else {
-            return ['result'=> 'data not updated'];
+            return ['result' => 'data not updated'];
         }
     }
-    
+    public function destroy($id)
+    {
+        Product::destroy($id);
+        return response()->json(null, 204);
+    }
+
 }

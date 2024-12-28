@@ -19,6 +19,13 @@
             padding: 0px;
             font-family: 'Nunito', sans-serif;
         }
+        #app{
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
     </style>
 </head>
 
