@@ -29,12 +29,13 @@ class ApiController extends Controller
     {
         $product = Product::find($request->id);
         $product->name = $request->name;
+        $product->artist = $request->artist;
         $product->img = $request->img;
         $product->price = $request->price;
         $product->description = $request->description;
         $result = $product->save();
         if ($result) {
-            return ['result' => 'data updated'];
+            return ['result' => 'Данные обновлены'];
         } else {
             return ['result' => 'data not updated'];
         }

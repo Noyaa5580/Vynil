@@ -16,6 +16,21 @@ const routes = [
         name: "Каталог",
     },
     {
+        path: "/login",
+        component: Login,
+        name: "Вход",
+    },
+    {
+        path: "/contacts",
+        component: Contacts,
+        name: "Контакты",
+    },
+    {
+        path: "/about",
+        component: About,
+        name: "О Нас",
+    },
+    {
         path: "/admin",
         component: Admin,
         name: "Админ-Панель",

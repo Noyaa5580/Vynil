@@ -1,11 +1,19 @@
 <template>
   <div class="page_content">
-    <div class="btn btn-success" @click="showAddProduct()">
-      Добавить продукт
-    </div>
+    <transition>
+      <div
+        v-if="SAP == false"
+        class="btn btn-success"
+        @click="showAddProduct()"
+      >
+        Добавить продукт
+      </div></transition
+    >
+
     <transition
       name="fade-move"
       @before-enter="beforeEnter"
+      :css="false"
       @enter="enter"
       @before-leave="beforeLeave"
       @leave="leave"
@@ -20,6 +28,7 @@
         <tr>
           <th scope="col">id</th>
           <th scope="col">Название</th>
+          <th scope="col">Исполнитель</th>
           <th scope="col">Изображение</th>
           <th scope="col">Цена</th>
           <th scope="col">Описание</th>
@@ -31,10 +40,17 @@
         <tr v-for="product in this.products" :key="product">
           <th scope="row">{{ product.id }}</th>
           <td>{{ product.name }}</td>
-          <td><img :src="product.img" :alt="product.img" /></td>
-          <td>{{ product.price }}</td>
+          <td>{{ product.artist }}</td>
+          <td>
+            <img :src="'/img/products/' + product.img + '.svg'" :alt="product.img" />
+          </td>
+          <td>{{ product.price }}₽</td>
           <td>{{ product.description }}</td>
-          <td><button @click="gotoEditor(product.id)" class="btn btn-warning">Изменить</button></td>
+          <td>
+            <button @click="gotoEditor(product.id)" class="btn btn-warning">
+              Изменить
+            </button>
+          </td>
           <td>
             <button @click="deleteProduct(product.id)" class="btn btn-danger">
               Удалить
@@ -69,13 +85,11 @@ export default {
     },
     getUpdates(data) {
       this.products_state = data;
-      console.log(this.products_state);
     },
     async getData() {
       try {
         await axios.get("http://0.0.0.0/api/products").then((response) => {
           this.products = response.data;
-          console.log(this.products);
         });
       } catch (error) {
         console.log(error);
@@ -95,7 +109,7 @@ export default {
       el.style.transition =
         "opacity 0.5s ease, transform 0.5s ease, height 0.5s ease";
       el.style.opacity = 1;
-      el.style.height = 132 + "px";
+      el.style.height = 262 + "px";
       el.style.transform = "translateX(0)";
       done(); // Завершаем анимацию
     },
@@ -115,7 +129,7 @@ export default {
     },
 
     gotoEditor(id) {
-      this.$router.push("/admin/edit?id="+id);
+      this.$router.push("/admin/edit?id=" + id);
     },
 
     async deleteProduct(id) {
@@ -132,8 +146,6 @@ export default {
           this.getData();
         }, 150);
         this.products_state = 0;
-      } else {
-        console.log("reloaded");
       }
     });
   },
@@ -141,8 +153,26 @@ export default {
 </script>
 
 <style scoped>
-.page_content{
+.page_content {
   min-width: 100%;
   height: 100%;
+}
+
+.v-enter-active,
+.v-leave-active {
+  transition: opacity 0.5s ease;
+}
+
+.v-enter-from,
+.v-leave-to {
+  opacity: 0;
+}
+td {
+  max-width: 500px;
+  text-align: justify;
+  hyphens: auto;
+}
+img {
+  max-width: 200px;
 }
 </style>

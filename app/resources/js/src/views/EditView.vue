@@ -8,6 +8,12 @@
         v-model="formData.name"
         value=""
       />
+      <input
+        type="text"
+        placeholder="Исполнитель"
+        v-model="formData.artist"
+        value=""
+      />
       <input type="text" placeholder="Цена продукта" v-model="formData.price" />
       <input
         type="text"
@@ -18,18 +24,19 @@
         placeholder="Oписание продукта"
         v-model="formData.description"
       />
-      <input type="submit" class="btn btn-primary" value="Сохранить"/>
+      <input type="submit" class="btn btn-primary" value="Сохранить" />
     </form>
   </div>
 </template>
 
 <script>
 import axios from "axios";
+import { useToast } from "vue-toastification";
+const toast = useToast();
 export default {
   data() {
     return {
       formData: {
-
       },
     };
   },
@@ -45,22 +52,23 @@ export default {
         console.log(error);
       }
     },
-   async updateData() {
+    async updateData() {
       try {
         const response = await axios.put(
           "http://0.0.0.0/api/products/" + this.$route.query.id,
           this.formData
         );
+             toast.info (response.status+ ' ' + response.data.result, {timeout: 2000})
         console.log(response);
-        this.$router.push('/admin');
+        this.$router.push("/admin");
       } catch (error) {
         console.log(error);
       }
-    }
+    },
   },
-  mounted(){
+  mounted() {
     this.getProduct();
-  }
+  },
 };
 </script>
 

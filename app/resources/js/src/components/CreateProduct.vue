@@ -6,8 +6,9 @@
         placeholder="Название продукта"
         v-model="formData.name"
       />
+      <input type="text" placeholder="Исполнитель" v-model="formData.artist" />
       <input type="text" placeholder="Цена продукта" v-model="formData.price" />
-      <input 
+      <input
         type="text"
         placeholder="Путь к изображению продукта"
         v-model="formData.img"
@@ -30,12 +31,15 @@
 
 <script>
 import axios from "axios";
+import { useToast } from "vue-toastification";
+const toast = useToast();
 export default {
   data() {
     return {
       SAP_state: false,
       formData: {
         name: "",
+        artist: "",
         price: "",
         img: "",
         description: "",
@@ -56,9 +60,11 @@ export default {
           "http://0.0.0.0/api/products",
           this.formData
         );
-        console.log(response);
+        if (response.status == 200){
+          toast.success(response.status + ' Объект добавлен', {timeout: 2000})
+        }
       } catch (error) {
-        console.log(error);
+        toast.error(error.status + ' Объект не может быть добавлен', {timeout: 2000})
       }
     },
   },
@@ -74,24 +80,26 @@ export default {
   margin: 12px 0px;
 }
 form {
+  padding-left: 24px;
   display: flex;
   gap: 24px;
-  width: 1000px;
+  width: 700px;
   flex-wrap: wrap;
   align-items: center;
 }
 textarea {
-  width: 300px;
-  width: 520px;
+  width: 625px;
   padding: 6px;
+  height: 80px;
   border-radius: 4px;
   border: 1px solid green;
+  resize: none;
 }
 textarea:focus {
   outline: none;
 }
 input {
-  width: 250px;
+  width: 300px;
   height: 40px;
   border-radius: 4px;
   border: 1px solid green;

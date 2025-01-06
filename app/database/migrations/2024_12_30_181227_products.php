@@ -14,6 +14,7 @@ return new class extends Migration {
 
             $table->id();
             $table->string(column: 'name');
+            $table->string(column: 'artist');
             $table->string(column: 'img');
             $table->string(column:'price');
             $table->string(column:'description');
@@ -27,7 +28,7 @@ return new class extends Migration {
      */
     public function down(): void
     {
-
+        Schema::dropIfExists('products');  
     }
 };
 
