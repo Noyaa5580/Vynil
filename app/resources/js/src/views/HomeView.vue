@@ -1,13 +1,21 @@
 <template>
-  <div>govno1</div>
+  <div>
+    <BannerSlider />
+    <ProductsSlider />
+    <RecomendationsBlock />
+  </div>
 </template>
 
 <script>
-export default {
+import BannerSlider from "../components/BannerSlider.vue";
+import ProductsSlider from "../components/ProductsSlider.vue";
+import RecomendationsBlock from '../components/RecomendationsBlock.vue';
 
-}
+
+export default {
+  components: { BannerSlider, ProductsSlider, RecomendationsBlock },
+};
 </script>
 
 <style>
-
 </style>

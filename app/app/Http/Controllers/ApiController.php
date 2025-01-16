@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Facades\DB;
 use App\Models\Product;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class ApiController extends Controller
@@ -18,10 +20,17 @@ class ApiController extends Controller
         return response()->json($item);
     }
 
+    public function limited($start, $limit)
+    {
+        $items = DB::table("products")->where('id', '>=', $start)->where('id', '<=', $limit)->get();
+        return response()->json($items);
+    }
+
+
     public function store(Request $request)
     {
 
-        \DB::table('products')->insert($request->all());
+        DB::table('products')->insert($request->all());
         return response()->json(['status' => 'sucsess', 200]);
     }
 
@@ -46,4 +55,15 @@ class ApiController extends Controller
         return response()->json(null, 204);
     }
 
+
+    public function indexUser()
+    {
+        $items = User::all();
+        return response()->json($items);
+    }
+    public function showUser($id)
+    {
+        $item = User::find($id);
+        return response()->json($item);
+    }
 }

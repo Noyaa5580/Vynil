@@ -46,8 +46,8 @@
       </div>
       <div class="social_networks">
         <img :src="'/img/icons/vk.svg'" />
-        <img :src="'/img/icons/telegram.svg'" />
-        <img :src="'/img/icons/github.svg'" />
+        <a href="https://t.me/noyaa_fromforest"><img :src="'/img/icons/telegram.svg'" /></a>
+       <a href="https://github.com/Noyaa5580"><img :src="'/img/icons/github.svg'" /></a> 
         <img :src="'/img/icons/youtube.svg'" />
       </div>
       <div class="payments">
@@ -65,6 +65,7 @@
   width: 100%;
   height: 450px;
   background-color: #f7f7f7;
+  margin-top: 40px;
 }
 
 .upper_line {
@@ -86,7 +87,6 @@
 }
 
 #logo1 {
-  width: 260px;
   height: 58px;
   margin-top: 24px;
 }

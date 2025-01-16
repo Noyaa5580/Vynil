@@ -1,5 +1,6 @@
 <template>
-  <div class="page_content">
+  <div >
+    <div v-if="this.current_user==2">
     <transition>
       <div
         v-if="SAP == false"
@@ -23,7 +24,7 @@
         @update:products="getUpdates"
       ></CreateProduct
     ></transition>
-    <table class="table">
+    <table class="table" >
       <thead>
         <tr>
           <th scope="col">id</th>
@@ -58,7 +59,8 @@
           </td>
         </tr>
       </tbody>
-    </table>
+    </table></div>
+    <div v-else>ERROR</div>
   </div>
 </template>
 
@@ -74,6 +76,7 @@ export default {
       SAP: false, //bool for show component "Show add product"
       products: [],
       products_state: 0,
+      current_user: ''
     };
   },
   methods: {
@@ -88,7 +91,7 @@ export default {
     },
     async getData() {
       try {
-        await axios.get("http://0.0.0.0/api/products").then((response) => {
+        await axios.get("/api/products").then((response) => {
           this.products = response.data;
         });
       } catch (error) {
@@ -129,7 +132,7 @@ export default {
     },
 
     gotoEditor(id) {
-      this.$router.push("/admin/edit?id=" + id);
+      this.$router.push("/edit?id=" + id);
     },
 
     async deleteProduct(id) {
@@ -138,6 +141,7 @@ export default {
     },
   },
   mounted() {
+    this.current_user= this.$cookies.get("role")
     this.getData();
     this.$watch("products_state", () => {
       if (this.products_state == 1) {
@@ -160,12 +164,18 @@ export default {
 
 .v-enter-active,
 .v-leave-active {
-  transition: opacity 0.5s ease;
+  transition: all .3s ease-in-out;
 }
-
 .v-enter-from,
 .v-leave-to {
   opacity: 0;
+  height: 0px;
+}
+
+.v-enter-to,
+.v-leave-from {
+  opacity: 1;
+  height: 38px;
 }
 td {
   max-width: 500px;

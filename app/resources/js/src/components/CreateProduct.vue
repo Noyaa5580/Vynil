@@ -57,7 +57,7 @@ export default {
     async postData() {
       try {
         const response = await axios.post(
-          "http://0.0.0.0/api/products",
+          "/api/products",
           this.formData
         );
         if (response.status == 200){

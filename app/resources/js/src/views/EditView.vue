@@ -36,8 +36,7 @@ const toast = useToast();
 export default {
   data() {
     return {
-      formData: {
-      },
+      formData: {},
     };
   },
   methods: {
@@ -55,10 +54,12 @@ export default {
     async updateData() {
       try {
         const response = await axios.put(
-          "http://0.0.0.0/api/products/" + this.$route.query.id,
+          "/api/products/" + this.$route.query.id,
           this.formData
         );
-             toast.info (response.status+ ' ' + response.data.result, {timeout: 2000})
+        toast.info(response.status + " " + response.data.result, {
+          timeout: 2000,
+        });
         console.log(response);
         this.$router.push("/admin");
       } catch (error) {

@@ -1,7 +1,15 @@
-<template></template>
+<template>
+<div><AuthForm /></div>
+</template>
 
 <script>
-export default {};
+import AuthForm from '../components/AuthForm.vue';
+
+export default {
+    components:{
+        AuthForm
+    }
+};
 </script>
 
 <style scoped>

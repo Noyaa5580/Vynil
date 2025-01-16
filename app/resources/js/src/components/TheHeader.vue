@@ -24,7 +24,13 @@
       <div><img :src="'img/logo.svg'" alt="" class="logo" /></div>
       <div class="menu_icons">
         <img :src="'img/icons/Heart_01.svg'" alt="" srcset="" class="icon" />
-        <img :src="'img/icons/User.svg'" alt="" srcset="" class="icon" />
+        <img
+          :src="'img/icons/User.svg'"
+          alt=""
+          srcset=""
+          class="icon"
+          @click="this.profile_link()"
+        />
         <img
           :src="'img/icons/Shopping_Cart_01.svg'"
           alt=""
@@ -39,6 +45,14 @@
           {{ url.name }}
         </router-link>
       </div>
+      <router-link
+        to="/admin"
+        v-if="show_admin"
+        class="link"
+        active-class="active_link"
+      >
+        Админ-панель
+      </router-link>
     </nav>
   </div>
 </template>
@@ -85,7 +99,7 @@
 }
 .city > p {
   margin-bottom: 0px;
-  min-width: 150px !important;
+  min-width: 190px !important;
   max-height: 30px;
 }
 .city_button {
@@ -107,6 +121,7 @@
   transition: 0.3s all ease-in-out;
   visibility: hidden;
   opacity: 0;
+  z-index: 1;
 }
 
 .city_drop {
@@ -121,7 +136,6 @@
   margin-left: 24px;
   width: 250px;
   height: 140px;
-  z-index: 1;
   border-radius: 10px;
   padding: 10px 0px;
 }
@@ -138,7 +152,7 @@
 }
 
 .item_drop:hover {
-  background-color: #D4452B;
+  background-color: #d4452b;
 }
 
 #first_item_drop {
@@ -168,7 +182,7 @@
   font-weight: 500;
 }
 .active_link {
-  color: #D4452B;
+  color: #d4452b;
 }
 
 .icon {
@@ -217,11 +231,15 @@
 
 <script>
 export default {
+  props: {
+    cookie_state: Boolean,
+    show_admin: Boolean,
+  },
   data: function () {
     return {
       urls: [
         { name: "Главная", link: "/" },
-        { name: "Каталог", link: "/catalog" },
+        { name: "Каталог", link: "/catalog?page=1" },
         { name: "Контакты", link: "/contacts" },
         { name: "О нас", link: "/about" },
       ],
@@ -255,6 +273,14 @@ export default {
     },
     Novosibirsk() {
       this.city = "Новосибирск";
+    },
+
+    profile_link() {
+      if (this.cookie_state == false) {
+        this.$router.push("/login");
+      } else {
+        this.$router.push("/profile?id=" + this.$cookies.get("id"));
+      }
     },
   },
 

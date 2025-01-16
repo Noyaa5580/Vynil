@@ -2,7 +2,12 @@ import Home from "../views/HomeView.vue";
 import Catalog from "../views/CatalogView.vue";
 import Admin from "../views/AdminView.vue";
 import Edit from "../views/EditView.vue"
-
+import Contacts from "../views/ContactsView.vue"
+import About from "../views/AboutView.vue"
+import Product from "../views/ProductView.vue"
+import Login from "../views/LoginView.vue"
+import Error from "../views/ErrorView.vue"
+import Profile from "../views/ProfileView.vue"
 
 const routes = [
     {
@@ -36,11 +41,21 @@ const routes = [
         name: "Админ-Панель",
     },
     {
-        path: "/admin/edit",
+        path: "/edit",
         component: Edit,
         name: "Редактирование товара",
-    }
-
+    },
+    {
+        path: "/product",
+        component: Product,
+        name: "Страница Товара",
+    },
+    {
+        path: "/profile",
+        component: Profile,
+        name: "Личный кабинет",
+    },
+    { path: '/:pathMatch(.*)*', component: Error },
 ];
 
 export default routes;
