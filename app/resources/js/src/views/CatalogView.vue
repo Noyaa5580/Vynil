@@ -115,7 +115,7 @@ input:focus {
 
 .sort_dropdown {
   display: flex;
-  font-family: "nunito";
+  font-family: "Martian Mono", serif;
   justify-content: space-between;
   border: 1px solid #a9a9a9;
   border-radius: 6px;
@@ -130,7 +130,7 @@ input:focus {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  font-family: "Nunito";
+  font-family: "Martian Mono", serif;
   width: 300px;
   margin-left: 8px;
 }
@@ -143,7 +143,7 @@ input:focus {
   margin: 16px 0px;
 }
 .filters_name {
-  font-family: "Montserrat Alternates";
+  font-family: "Zen Kaku Gothic Antique", serif;
   font-weight: 500;
   font-size: 32px;
   text-align: center;
