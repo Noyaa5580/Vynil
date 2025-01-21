@@ -46,8 +46,12 @@
       </div>
       <div class="social_networks">
         <img :src="'/img/icons/vk.svg'" />
-        <a href="https://t.me/noyaa_fromforest"><img :src="'/img/icons/telegram.svg'" /></a>
-       <a href="https://github.com/Noyaa5580"><img :src="'/img/icons/github.svg'" /></a> 
+        <a href="https://t.me/noyaa_fromforest"
+          ><img :src="'/img/icons/telegram.svg'"
+        /></a>
+        <a href="https://github.com/Noyaa5580"
+          ><img :src="'/img/icons/github.svg'"
+        /></a>
         <img :src="'/img/icons/youtube.svg'" />
       </div>
       <div class="payments">
@@ -113,6 +117,7 @@
 
 #Law {
   font-size: 32px;
+  font-weight: 600;
 }
 
 .info_block3 {
@@ -147,7 +152,7 @@
 }
 .copy_right {
   display: flex;
-  align-items: flex-end;
+  align-items: center;
   margin-bottom: 4px;
 }
 
@@ -172,10 +177,10 @@
 
 @media (min-width: 320px) and (max-width: 767px) {
   .footer {
-    height: 480px;
+    height: 420px;
   }
   .info_block1 {
-    font-size: 10px;
+    font-size: 8px;
     margin-left: 4px;
     height: 200px;
     width: 200px;
@@ -190,14 +195,15 @@
   }
 
   .info_block2 {
-    font-size: 12px;
+    font-size: 8px;
     height: 200px;
     margin-top: 50px;
     height: 120px;
   }
 
   #Partner {
-    font-size: 12px;
+    font-size: 10px;
+    font-weight: 600;
   }
 
   #distribution {
@@ -205,7 +211,8 @@
   }
 
   #Law {
-    font-size: 12px;
+    font-size: 10px;
+    font-weight: 600;
   }
   .info_block3 {
     margin-top: 40px;
@@ -217,7 +224,7 @@
 
   .law_info {
     margin-top: 20px;
-    font-size: 10px;
+    font-size: 8px;
   }
   #user_agree {
     margin-bottom: 8px;
@@ -240,24 +247,51 @@
     flex-wrap: wrap;
     justify-content: center;
   }
+  .payments >img{
+  width: 70px;
+}
 }
 @media (min-width: 767px) and (max-width: 1023px) {
   .footer {
-    height: 480px;
+    height: 380px;
   }
   .upper_line {
     justify-content: center;
     gap: 24px;
   }
+  .info_block1,
+  .info_block2,
+  .law_info {
+    font-size: 12px;
+  }
+
+  #Law,
+  #Partner {
+    font-size: 16px;
+  }
 
   .payments {
     margin-right: 0px;
+    gap: 0px;
     flex-wrap: wrap;
+    justify-content: center;
   }
-
+.payments >img{
+  width: 70px;
+}
   .down_line {
     justify-content: center;
-    gap: 24px;
+    gap: 0px;
+  }
+  .rights {
+    margin-left: 0px;
+  }
+  .down_line {
+    display: flex;
+    justify-content: space-around;
+  }
+  #logo2 {
+    width: 120px;
   }
 }
 </style>

@@ -12,30 +12,21 @@
       <div class="filter_border"></div>
       <p class="filter_category__name">Автор</p>
       <div class="search">
-        <input style="width: 170px" type="text" placeholder="Поиск" />
+        <input style="width: 200px" type="text" placeholder="Поиск" />
       </div>
-      <label v-for="item in authors" :key="item"
+      <label v-for="item in this.authors" :key="item"
         ><input type="checkbox" name="" id="" class="checkbox" />{{
-          item.author
+          item.artist
         }}</label
       >
       <div class="filter_border"></div>
-      <p class="filter_category__name">Переплет</p>
-      <label
-        ><input type="checkbox" name="" id="" class="checkbox" />мягкий</label
-      >
     </div>
     <div class="products">
       <div class="search_line">
-        <div class="sort_dropdown">
-          <p>По цене</p>
-          <!-- <img src="../assets/icons/Caret_Down_SM.svg" alt="" /> -->
-        </div>
         <div class="search"><input type="text" placeholder="Поиск" /></div>
       </div>
- <transition name="fade">
-      <div class="cards" v-show="update">
-       
+      <transition name="fade">
+        <div class="cards" v-show="update">
           <ProductCard
             v-for="item in products"
             :key="item"
@@ -45,33 +36,43 @@
             :img="item.img"
             :id="item.id"
           ></ProductCard>
-     
-      </div>   </transition>
+        </div>
+      </transition>
       <div class="pagination">
         <nav aria-label="Page navigation example">
           <ul class="pagination">
-            <li class="page-item" >
-              <router-link :to= '"/catalog?page=" + (Number(this.$route.query.page)-1)' class="page-link" href="#" aria-label="Previous">
+            <li class="page-item">
+              <router-link
+                :to="'/catalog?page=' + (Number(this.$route.query.page) - 1)"
+                class="page-link"
+                href="#"
+                aria-label="Previous"
+              >
                 <span aria-hidden="true">&laquo;</span>
               </router-link>
             </li>
             <li class="page-item">
-              <router-link to="/catalog?page=1" class="page-link" 
+              <router-link to="/catalog?page=1" class="page-link"
                 >1</router-link
               >
             </li>
             <li class="page-item">
-              <router-link to="/catalog?page=2" class="page-link" 
+              <router-link to="/catalog?page=2" class="page-link"
                 >2</router-link
               >
             </li>
             <li class="page-item">
-              <router-link to="/catalog?page=3" class="page-link" 
+              <router-link to="/catalog?page=3" class="page-link"
                 >3</router-link
               >
             </li>
             <li class="page-item">
-              <router-link :to= '"/catalog?page=" + (Number(this.$route.query.page)+1)' class="page-link" href="#" aria-label="Next">
+              <router-link
+                :to="'/catalog?page=' + (Number(this.$route.query.page) + 1)"
+                class="page-link"
+                href="#"
+                aria-label="Next"
+              >
                 <span aria-hidden="true">&raquo;</span>
               </router-link>
             </li>
@@ -106,7 +107,7 @@
   border: 1px solid #a9a9a9;
   border-radius: 6px;
   padding-left: 12px;
-  width: 848px;
+  width: 1130px;
   height: 24px;
 }
 input:focus {
@@ -161,8 +162,8 @@ input:focus {
   width: 48px;
   height: 20px;
 }
-.page_link:focus{
-box-shadow: 0px 0px 10px 0.3px #d4452b; 
+.page_link:focus {
+  box-shadow: 0px 0px 10px 0.3px;
 
   padding: 0px;
 }
@@ -176,8 +177,8 @@ label {
 .checkbox {
   margin-right: 4px;
 }
-.active_page{
-box-shadow: 0px 0px 10px 0.3px #d4452b; 
+.active_page {
+  box-shadow: 0px 0px 10px 0.3px #d4452b;
 }
 
 .fade-enter-active,
@@ -204,9 +205,8 @@ export default {
   data: function () {
     return {
       products: [],
-      catalogs_array: ["bestsellers", "popular", "new-products"],
-      authors: [],
       update: true,
+      authors: [],
     };
   },
   methods: {
@@ -231,19 +231,35 @@ export default {
       }
       axios
         .get("/api/pagination/start=" + start + "&lim=" + limit)
-        .then((response) => (this.products = response.data))
+        .then((response) => {
+          this.products = response.data;
+          this.authors = this.products;
+          let a = JSON.parse(JSON.stringify(this.authors));
+          let currentArtist;
+          for (let i = 0; i < a.length; i++) {
+            currentArtist = i + 1;
+            if (a[i].artist == a[currentArtist].artist) {
+              a.splice(i, 1);
+            }
+            this.authors = a;
+          }
+        })
         .catch((error) => {
           console.error("Ошибка при запросе к API:", error);
         });
     },
-    randomize_authors() {
-      let random = Math.round(Math.random() * 2 - 0);
+    getAuthors() {
       axios
-        .get("/api/products" + this.catalogs_array[random])
-        .then((response) => (this.authors = response.data))
+        .get("/api/products")
+        .then((response) => {
+          this.authors = response.data;
+        })
         .catch((error) => {
           console.error("Ошибка при запросе к API:", error);
         });
+    },
+    getAuthors() {
+      console.log(this.products);
     },
   },
   mounted() {
@@ -255,6 +271,7 @@ export default {
         this.update = true;
       }, 300);
     });
+
     this.getProducts();
   },
 };

@@ -193,6 +193,7 @@
   .header_string {
     justify-content: center;
     margin: 10px 0px;
+    gap: 15%;
   }
 
   .menu {
@@ -209,16 +210,50 @@
     height: 30px;
   }
   .city_button {
-    display: none;
+    margin-left: 0px;
+    width: 100px;
   }
 
+  .city {
+    font-size: 9px;
+  }
+  .city > p {
+    min-width: 40px !important;
+  }
+  .delivery_time {
+    font-size: 8px;
+    margin-left: 16px;
+    margin-top: 0px;
+    width: 80px;
+  }
+  #location {
+    max-width: 12px !important;
+    min-width: 12px !important;
+  }
+  .logo{
+    width: 80px;
+  }
   .menu_icons {
-    width: 10px;
     height: 30px;
     margin-right: 0px;
   }
   .menu_icons {
-    display: none;
+    gap: 4px;
+  }
+  .menu_icons > img {
+    width: 16px;
+  }
+  .drop_con{
+    width: 200px;
+  }
+  .city_drop{
+    width: 180px;
+    height: 90px;
+  }
+  .item_drop{
+    max-width: 180px;
+    min-height: 20px;
+    font-size: 12px;
   }
 }
 

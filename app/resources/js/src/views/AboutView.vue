@@ -13,7 +13,7 @@
       </p>
       <img :src="'img/about1.svg'" alt="" />
     </div>
-    <div class="about">
+    <div class="about" id="block2">
       <img :src="'img/about2.svg'" alt="" />
       <p>
         Мы гордимся тем, что поддерживаем местных артистов и независимые лейблы,
@@ -45,13 +45,43 @@
   font-family: "Martian Mono", serif;
 }
 
-.replies {
-  background-color: #434738;
-  width: 100%;
-  height: 350px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin-bottom: 24px;
+#block2 {
+  margin-top: 24px;
+}
+@media (min-width: 320px) and (max-width: 767px) {
+  .about {
+    height: 200px;
+    gap: 2px;
+    margin: 0px 5px 20px 5px;
+    font-weight: 500;
+    font-size: 8px;
+  }
+  .about > img {
+    width: 100px;
+  }
+}
+@media (min-width: 768px) and (max-width: 1023px) {
+    .about {
+    height: 200px;
+    gap: 2px;
+    margin: 0px 5px 20px 5px;
+    font-weight: 500;
+    font-size: 12px;
+  }
+  .about > img {
+    width: 200px;
+  }
+}
+@media (min-width: 1024px) and (max-width: 1440px) {
+      .about {
+    height: 250px;
+    gap: 12px;
+    margin: 0px 15px 30px 15px;
+    font-weight: 500;
+    font-size: 14px;
+  }
+  .about > img {
+    width: 250px;
+  }
 }
 </style>
