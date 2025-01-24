@@ -38,52 +38,34 @@
           ></ProductCard>
         </div>
       </transition>
-      <div class="pagination">
-        <nav aria-label="Page navigation example">
-          <ul class="pagination">
-            <li class="page-item">
-              <router-link
-                :to="'/catalog?page=' + (Number(this.$route.query.page) - 1)"
-                class="page-link"
-                href="#"
-                aria-label="Previous"
-              >
-                <span aria-hidden="true">&laquo;</span>
-              </router-link>
-            </li>
-            <li class="page-item">
-              <router-link to="/catalog?page=1" class="page-link"
-                >1</router-link
-              >
-            </li>
-            <li class="page-item">
-              <router-link to="/catalog?page=2" class="page-link"
-                >2</router-link
-              >
-            </li>
-            <li class="page-item">
-              <router-link to="/catalog?page=3" class="page-link"
-                >3</router-link
-              >
-            </li>
-            <li class="page-item">
-              <router-link
-                :to="'/catalog?page=' + (Number(this.$route.query.page) + 1)"
-                class="page-link"
-                href="#"
-                aria-label="Next"
-              >
-                <span aria-hidden="true">&raquo;</span>
-              </router-link>
-            </li>
-          </ul>
-        </nav>
+      <div class="pagination_line">
+        <div class="pagination">
+          <router-link
+            to="/catalog?page=1"
+            class="pagination_button"
+            exact-active-class="active_pag"
+            >1</router-link
+          >
+
+          <router-link
+            to="/catalog?page=2"
+            class="pagination_button"
+            exact-active-class="active_pag"
+            >2</router-link
+          >
+          <router-link
+            to="/catalog?page=3"
+            class="pagination_button"
+            exact-active-class="active_pag"
+            >3</router-link
+          >
+        </div>
       </div>
     </div>
   </div>
 </template>
 
-<style>
+<style scoped>
 .content {
   display: flex;
   width: 100%;
@@ -93,7 +75,7 @@
 }
 .cards {
   display: flex;
-  width: 1200px;
+  width: 1130px;
   flex-wrap: wrap;
   gap: 24px;
   margin: 24px 0px;
@@ -194,6 +176,36 @@ label {
 .fade-enter-to,
 .fade-leave-from {
   opacity: 1;
+}
+
+.pagination {
+  display: flex;
+  gap: 4px;
+  justify-content: flex-end;
+}
+.pagination_button {
+  cursor: pointer;
+  display: flex;
+  width: 30px;
+  height: 30px;
+  align-items: center;
+  justify-content: center;
+  color: #d4452b;
+  border: 1px solid #d4452b;
+  border-radius: 4px;
+  transition: all ease-in-out 0.3s;
+  text-decoration: none;
+}
+.pagination_button:hover {
+  background-color: #d4452b;
+  color: #fff;
+  border: 1px solid #d4452b;
+}
+
+.active_pag {
+  background-color: #d4452b;
+  color: #fff;
+  border: 1px solid #d4452b;
 }
 </style>
 

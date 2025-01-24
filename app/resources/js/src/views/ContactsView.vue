@@ -35,7 +35,7 @@
         },
       }"
       width="100%"
-      height="500px"
+      :height="this.mapHeight"
     >
       <yandex-map-default-scheme-layer />
       <yandex-map-default-features-layer />
@@ -50,6 +50,10 @@
 </template>
 
 <style scoped>
+.map {
+  width: 100%;
+  height: 500px;
+}
 .contacts_label {
   font-family: "Zen Kaku Gothic Antique", serif;
   font-weight: 600;
@@ -179,6 +183,146 @@
   width: 178px;
   height: 37px;
 }
+
+@media (min-width: 320px) and (max-width: 767px) {
+  .contacts {
+    width: 300px;
+    height: 300px;
+  }
+  .contacts-info {
+    width: 150px;
+    padding-left: 12px;
+  }
+  .contacts_label {
+    margin: 0px;
+    margin-bottom: 12px;
+    font-size: 20px;
+    text-align: center;
+  }
+  .pic {
+    width: 120px;
+  }
+  .pic > img {
+    width: 120px;
+  }
+  .info-point {
+    margin-top: 5px;
+  }
+  .info_label {
+    font-size: 12px;
+  }
+  .contact_name {
+    font-size: 10px;
+    margin-bottom: 5px;
+  }
+  .contact_desc {
+    font-size: 8px;
+    margin-bottom: 4px;
+  }
+
+  .border {
+    margin: 10px;
+  }
+
+  .contacts_form {
+    width: 300px;
+    height: 450px;
+    border: 2px solid #000;
+  }
+  .input_text {
+    width: 270px;
+    height: 40px;
+  }
+  .input_text::placeholder {
+    font-size: 15px;
+  }
+  #msg {
+    min-height: 100px;
+  }
+  #send_button {
+    margin-left: 0px;
+  }
+}
+@media (min-width: 768px) and (max-width: 1023px) {
+  .contacts {
+    width: 600px;
+    height: 400px;
+  }
+  .contacts-info {
+    width: 300px;
+    padding-left: 32px;
+  }
+  .contacts_label {
+    margin: 0px;
+    margin-bottom: 12px;
+    font-size: 24px;
+    text-align: center;
+  }
+  .pic {
+    width: 300px;
+  }
+  .pic > img {
+    width: 250px;
+  }
+  .info-point {
+    margin-top: 5px;
+  }
+  .info_label {
+    font-size: 18px;
+  }
+  .contact_name {
+    font-size: 14px;
+    margin-bottom: 5px;
+  }
+  .contact_desc {
+    font-size: 12px;
+    margin-bottom: 4px;
+  }
+
+  .border {
+    margin: 10px;
+  }
+}
+@media (min-width: 1024px) and (max-width: 1440px) {
+  .contacts {
+    width: 900px;
+    height: 600px;
+  }
+  .contacts-info {
+    width: 450px;
+    padding-left: 32px;
+  }
+  .contacts_label {
+    margin: 0px;
+    margin-bottom: 12px;
+    font-size: 28px;
+    text-align: center;
+  }
+  .pic {
+    width: 450px;
+  }
+  .pic > img {
+    width: 400px;
+  }
+  .info-point {
+    margin-top: 12px;
+  }
+  .info_label {
+    font-size: 24px;
+  }
+  .contact_name {
+    font-size: 18px;
+    margin-bottom: 5px;
+  }
+  .contact_desc {
+    font-size: 16px;
+    margin-bottom: 12px;
+  }
+
+  .border {
+    margin: 10px;
+  }
+}
 </style>
 
 <script>
@@ -207,7 +351,28 @@ export default {
           adress: "г. Москва, ул. Староватутинский пр-д, д. 6",
         },
       ],
+      mapHeight: "",
     };
+  },
+  methods: {
+    getWidth() {
+      return document.body.clientWidth;
+    },
+    setMapSize() {
+      let pageWidth = this.getWidth();
+      if (pageWidth > 320 && pageWidth < 767) {
+        this.mapHeight = "300px";
+      }
+      if (pageWidth > 767 && pageWidth < 1023) {
+        this.mapHeight = "400px";
+      }
+      if (pageWidth > 1024) {
+        this.mapHeight = "500px";
+      }
+    },
+  },
+  mounted() {
+    this.setMapSize();
   },
 };
 </script>

@@ -193,7 +193,7 @@
   .header_string {
     justify-content: center;
     margin: 10px 0px;
-    gap: 15%;
+    gap: 12%;
   }
 
   .menu {
