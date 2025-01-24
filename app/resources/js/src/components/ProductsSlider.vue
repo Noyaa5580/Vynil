@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="con">
     <div
       class="slider"
       v-on:mouseover="show_buttons1()"
@@ -58,8 +58,8 @@
 }
 
 .button_slider {
-  width: 50px;
-  height: 50px;
+  min-width: 50px;
+  min-height: 50px;
   background-color: white;
   border-radius: 50%;
   box-shadow: 0 0 5px 3px rgba(0, 0, 0, 0.05);
@@ -86,24 +86,102 @@
   transition: all ease-in-out 0.3s;
 }
 @media (min-width: 320px) and (max-width: 767px) {
+  .con {
+    height: 600px;
+    display: flex;
+    justify-content: center;
+    background: #f1f1f1;
+    margin-top: 24px;
+  }
+  .slider_name {
+    margin: 0px;
+    margin: 12px 0px;
+    text-align: center;
+  }
   .slider_line {
     padding-left: 12px;
-    width: 900%;
-    gap: 20px;
+    width: 1100%;
+    gap: 0px;
+  }
+  .slider {
+    max-width: 300px;
+    height: 600px;
+  }
+  .buttons {
+    justify-content: center;
+    visibility: visible;
+    opacity: 1;
+    gap: 120px;
   }
 }
 
 @media (min-width: 768px) and (max-width: 1023px) {
+  .con {
+    display: flex;
+    justify-content: center;
+    background: #f1f1f1;
+    margin-top: 24px;
+    height: 600px;
+  }
+  .slider {
+    height: 600px;
+  }
+  .slider_name {
+    margin: 0px;
+    margin: 12px 0px;
+    text-align: center;
+  }
   .slider_line {
     padding-left: 12px;
-    width: 500%;
-    gap: 40px;
+    width: 1100%;
+    gap: 0px;
+  }
+  .slider {
+    max-width: 600px;
+  }
+  .buttons {
+    visibility: visible;
+    opacity: 1;
+    padding: 0px 5px;
+  }
+  .button_slider {
+    margin: 0px;
   }
 }
 @media (min-width: 1024px) and (max-width: 1440px) {
   .slider_line {
     padding-left: 12px;
     gap: 120px;
+  }
+}
+@media (min-width: 1024px) and (max-width: 1440px) {
+  .con {
+    display: flex;
+    justify-content: center;
+  }
+  .slider {
+    height: 600px;
+  }
+  .slider_name {
+    margin: 0px;
+    margin: 12px 0px;
+    text-align: center;
+  }
+  .slider_line {
+    padding-left: 12px;
+    width: 1100%;
+    gap: 0px;
+  }
+  .slider {
+    max-width: 900px;
+  }
+  .buttons {
+    visibility: visible;
+    opacity: 1;
+    padding: 0px 5px;
+  }
+  .button_slider {
+    margin: 0px;
   }
 }
 </style>
@@ -140,14 +218,14 @@ export default {
       if (window.innerWidth >= 320 && window.innerWidth <= 767) {
         slider.style.left = this.offset1 + "%";
         if (this.offset1 > 0) {
-          this.offset1 = -800;
+          this.offset1 = -1100;
           slider.style.left = this.offset1 + "%";
         }
       }
       if (window.innerWidth >= 768 && window.innerWidth <= 1023) {
         slider.style.left = this.offset1 + "%";
         if (this.offset1 > 0) {
-          this.offset1 = -400;
+          this.offset1 = -500;
           slider.style.left = this.offset1 + "%";
         }
       }
@@ -171,7 +249,7 @@ export default {
       this.offset1 -= 100;
       if (window.innerWidth >= 320 && window.innerWidth <= 767) {
         slider.style.left = this.offset1 + "%";
-        if (this.offset1 < -800) {
+        if (this.offset1 < -1100) {
           this.offset1 = 0;
           slider.style.left = this.offset1 + "%";
         }

@@ -6,24 +6,26 @@
         Мы рекомендуем!
       </button>
     </div>
-    <transition>
-      <ProductCard
-        :name="this.card1.name"
-        :price="this.card1.price"
-        :artist="this.card1.artist"
-        :img="this.card1.img"
-        :id="this.card1.id"
-      />
-    </transition>
-    <transition>
-      <ProductCard
-        :name="this.card2.name"
-        :price="this.card2.price"
-        :artist="this.card2.artist"
-        :img="this.card2.img"
-        :id="this.card2.id"
-      />
-    </transition>
+    <div class="cards">
+      <transition>
+        <ProductCard
+          :name="this.card1.name"
+          :price="this.card1.price"
+          :artist="this.card1.artist"
+          :img="this.card1.img"
+          :id="this.card1.id"
+        />
+      </transition>
+      <transition>
+        <ProductCard
+          :name="this.card2.name"
+          :price="this.card2.price"
+          :artist="this.card2.artist"
+          :img="this.card2.img"
+          :id="this.card2.id"
+        />
+      </transition>
+    </div>
   </div>
 </template>
 
@@ -43,8 +45,8 @@ export default {
   },
   methods: {
     recomendate() {
-      this.card1 = '';
-      this.card2 = '';
+      this.card1 = "";
+      this.card2 = "";
       this.getRecs();
     },
     get_rec_num() {
@@ -111,5 +113,79 @@ export default {
   z-index: 1;
   cursor: pointer;
 }
-
+.cards {
+  display: flex;
+  flex-direction: row;
+  gap: 50px;
+}
+@media (min-width: 320px) and (max-width: 767px) {
+  .cards {
+    display: flex;
+    flex-direction: column;
+    gap: 50px;
+  }
+  .block {
+    height: 1050px;
+    flex-direction: column;
+    align-items: center;
+    padding-left: 20px;
+  }
+  .recs {
+    width: 320px;
+    display: flex;
+    justify-content: center;
+  }
+  .recs > img {
+    display: none;
+  }
+  .rec_button {
+    margin-right: 20px;
+    width: 300px;
+    height: 40px;
+    position: static;
+    font-size: 24px;
+  }
+}
+@media (min-width: 768px) and (max-width: 1023px) {
+  .block {
+    height: 550px;
+    flex-direction: column;
+    align-items: center;
+    padding-left: 20px;
+  }
+  .recs {
+    width: 320px;
+    display: flex;
+    justify-content: center;
+  }
+  .recs > img {
+    display: none;
+  }
+  .rec_button {
+    margin-right: 20px;
+    width: 300px;
+    height: 40px;
+    position: static;
+    font-size: 24px;
+  }
+}
+@media (min-width: 1024px) and (max-width: 1440px) {
+  .block {
+    height: 550px;
+  }
+  .recs {
+    max-width: 600px;
+    padding: 20px;
+  }
+  .recs > img {
+    width: 370px;
+  }
+  .rec_button {
+    width: 350px;
+    height: 110px;
+    position: relative;
+    bottom: 130px;
+    left: 30px;
+  }
+}
 </style>
