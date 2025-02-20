@@ -14,6 +14,15 @@ class ApiController extends Controller
         $items = Product::all();
         return response()->json($items);
     }
+    public function Search(Request $request, $search)
+    {
+        $items = DB::table("products")->whereLike("name", "%" . $search . "%")->orWhereLike("artist", "%" . $search . "%")->get();
+        return response()->json($items);
+        if ($request->is('/api/search/value=*')) {
+            return dd($items);
+        }
+    }
+
     public function show($id)
     {
         $item = Product::find($id);
@@ -29,7 +38,6 @@ class ApiController extends Controller
 
     public function store(Request $request)
     {
-
         DB::table('products')->insert($request->all());
         return response()->json(['status' => 'sucsess', 200]);
     }

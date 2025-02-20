@@ -9,10 +9,10 @@
       <div class="buttons_container">
         <div class="buttons" id="buttons1">
           <div class="button_slider" id="left1" @click="this.slider_left1()">
-            <!-- <img src="../assets/icons/Arrow_left.svg" alt="" /> -->
+            <img :src="'img/icons/Arrow_left.svg'" alt="" />
           </div>
           <div class="button_slider" id="right1" @click="this.slider_right1()">
-            <!-- <img src="../assets/icons/Arrow_right.svg" alt="" /> -->
+            <img :src="'img/icons/Arrow_right.svg'" alt="" />
           </div>
         </div>
       </div>

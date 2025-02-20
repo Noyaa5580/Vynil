@@ -5,14 +5,14 @@
       <p class="filter_category__name" style="margin-top: 16px">Цена</p>
       <div class="price">
         <p>от</p>
-        <input type="number" />
+        <input type="number" min="0" class="price_input" />
         <p>до</p>
-        <input type="number" />
+        <input type="number" min="0" class="price_input" />
       </div>
       <div class="filter_border"></div>
       <p class="filter_category__name">Автор</p>
-      <div class="search">
-        <input style="width: 200px" type="text" placeholder="Поиск" />
+      <div class="authorSearch">
+        <input type="text" placeholder="Поиск автора" />
       </div>
       <label v-for="item in this.authors" :key="item"
         ><input type="checkbox" name="" id="" class="checkbox" />{{
@@ -23,7 +23,28 @@
     </div>
     <div class="products">
       <div class="search_line">
-        <div class="search"><input type="text" placeholder="Поиск" /></div>
+        <div class="search">
+          <input type="text" placeholder="Поиск" v-model="searchValue" />
+          <div>
+            <div
+              class="searched"
+              v-for="product in this.searchedItems"
+              :key="product"
+            >
+              <router-link :to="'/product?id=' + product.id" class="item">
+                <img
+                  :src="'/img/products/' + product.img + '.svg'"
+                  :alt="product.img"
+                />
+                <div>
+                  <div>{{ product.name }}</div>
+                  <div>{{ product.artist }}</div>
+                  <div>{{ product.price }} ₽</div>
+                </div>
+              </router-link>
+            </div>
+          </div>
+        </div>
       </div>
       <transition name="fade">
         <div class="cards" v-show="update">
@@ -68,14 +89,14 @@
 <style scoped>
 .content {
   display: flex;
-  width: 100%;
   justify-content: center;
+  gap: 24px;
   margin: 0px 68px;
   width: calc(100% - 132px);
 }
 .cards {
   display: flex;
-  width: 1130px;
+  width: 1100px;
   flex-wrap: wrap;
   gap: 24px;
   margin: 24px 0px;
@@ -89,24 +110,11 @@
   border: 1px solid #a9a9a9;
   border-radius: 6px;
   padding-left: 12px;
-  width: 1130px;
+  width: 1100px;
   height: 24px;
 }
 input:focus {
   outline: none;
-}
-
-.sort_dropdown {
-  display: flex;
-  font-family: "Martian Mono", serif;
-  justify-content: space-between;
-  border: 1px solid #a9a9a9;
-  border-radius: 6px;
-  width: 198px;
-  height: 24px;
-  margin-right: 24px;
-  cursor: pointer;
-  padding-left: 12px;
 }
 
 .filters {
@@ -138,15 +146,14 @@ input:focus {
   margin-top: 8px;
 }
 
-.price > input {
+.price_input {
   border: 1px solid #a9a9a9;
   border-radius: 12px;
-  width: 48px;
-  height: 20px;
+  width: 80px;
+  height: 30px;
 }
 .page_link:focus {
   box-shadow: 0px 0px 10px 0.3px;
-
   padding: 0px;
 }
 .filter_category__name {
@@ -158,6 +165,9 @@ label {
 }
 .checkbox {
   margin-right: 4px;
+}
+.authorSearch {
+  width: 200px;
 }
 .active_page {
   box-shadow: 0px 0px 10px 0.3px #d4452b;
@@ -207,6 +217,104 @@ label {
   color: #fff;
   border: 1px solid #d4452b;
 }
+
+.searched {
+  margin-top: 4px;
+  display: flex;
+  padding: 8px;
+  background-color: #f1f1f1;
+  border-radius: 4px;
+}
+
+.item {
+  display: flex;
+  width: 100%;
+  color: black;
+  text-decoration: none;
+  gap: 24px;
+}
+.item > img {
+  width: 200px;
+}
+@media (min-width: 320px) and (max-width: 767px) {
+  .content {
+    width: 100%;
+    margin: 0px;
+    flex-direction: column;
+    align-items: center;
+  }
+  .filter_border {
+    display: none;
+  }
+  .filters {
+    flex-direction: column-reverse;
+    align-items: center;
+  }
+  .filters_name {
+    display: none;
+  }
+  .filter_category__name {
+    display: none;
+  }
+  .cards {
+    width: 300px;
+    justify-content: center;
+  }
+  .search > input {
+    width: 300px;
+  }
+  label {
+    display: none;
+  }
+  .products {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  .authorSearch > input {
+    width: 100%;
+    margin-bottom: 24px;
+  }
+  .card{
+    margin-right: 0px;
+  }
+}
+@media (min-width: 768px) and (max-width: 1023px) {
+  .cards {
+    width: 630px;
+    justify-content: center;
+  }
+  .search > input {
+    width: 630px;
+  }
+  .filters {
+    width: 120px;
+  }
+  .filter_border {
+    width: 120px;
+  }
+  .price {
+    flex-direction: column;
+  }
+  .price_input {
+    width: 120px;
+  }
+  .authorSearch > input {
+    width: 130px;
+  }
+  label {
+    font-size: 14px;
+  }
+}
+@media (min-width: 1024px) and (max-width: 1440px) {
+  .cards {
+    width: 700px;
+    justify-content: center;
+  }
+  .search > input {
+    width: 700px;
+  }
+}
 </style>
 
 <script>
@@ -216,6 +324,8 @@ export default {
   components: { ProductCard },
   data: function () {
     return {
+      searchValue: "",
+      searchedItems: [],
       products: [],
       update: true,
       authors: [],
@@ -273,6 +383,22 @@ export default {
     getAuthors() {
       console.log(this.products);
     },
+    async search() {
+      try {
+        this.searchedItems = await axios
+          .get("/api/search/value=" + this.searchValue)
+          .then((response) => {
+            setTimeout(() => {
+              this.searchedItems = response.data;
+              if (this.searchValue == "") {
+                this.searchedItems = [];
+              }
+            }, 200);
+          });
+      } catch (error) {
+        console.error(error);
+      }
+    },
   },
   mounted() {
     this.$watch("$route.query.page", () => {
@@ -283,7 +409,9 @@ export default {
         this.update = true;
       }, 300);
     });
-
+    this.$watch("searchValue", () => {
+      this.search();
+    });
     this.getProducts();
   },
 };

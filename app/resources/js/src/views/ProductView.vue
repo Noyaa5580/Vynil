@@ -11,7 +11,6 @@
           <p class="product_name">{{ product_info.name }}</p>
           <div class="specs">
             <p>Артикул: {{ product_info.id }}</p>
-            <p>Переплет: мягкий</p>
             <p>Автор: {{ product_info.artist }}</p>
           </div>
           <div class="description">
@@ -171,7 +170,7 @@
   display: flex;
   justify-content: center;
   flex-wrap: wrap;
-  width: 1500px;
+  width: 80%;
   gap: 24px;
 }
 
@@ -202,6 +201,137 @@
 .fade-enter-to,
 .fade-leave-from {
   opacity: 1;
+}
+
+@media (min-width: 320px) and (max-width: 767px) {
+  p {
+    margin-bottom: 2px;
+    text-align: center;
+  }
+  .page_content {
+    margin: 0px;
+    justify-content: center;
+  }
+  .product_info > img {
+    width: 300px;
+    height: 300px;
+  }
+  .product_info {
+    align-items: center;
+    flex-direction: column;
+  }
+  .product_specifications {
+    margin: 0px;
+  }
+  .product_name {
+    font-size: 18px;
+  }
+  .specs {
+    gap: 4px;
+    margin-top: 8px;
+    font-size: 12px;
+  }
+  .specs_description {
+    font-size: 20px;
+  }
+  .description_text {
+    font-size: 12px;
+    padding: 8px;
+    text-align: left;
+  }
+  .buy_block {
+    margin-left: 0px;
+  }
+  .dil_time {
+    text-align: left;
+  }
+  .card {
+    margin-right: 0px;
+  }
+}
+@media (min-width: 768px) and (max-width: 1023px) {
+ p {
+    margin-bottom: 2px;
+    text-align: center;
+  }
+  .page_content {
+    margin: 0px;
+    justify-content: center;
+  }
+  .product_info > img {
+    width: 380px;
+    height: 380px;
+  }
+  .product_info {
+    align-items: center;
+    flex-direction: column;
+  }
+  .product_specifications {
+    margin: 0px;
+  }
+
+  .specs {
+    gap: 4px;
+    margin-top: 8px;
+    font-size: 16px;
+  }
+  .specs_description {
+    font-size: 20px;
+  }
+  .description_text {
+    font-size: 16px;
+    padding: 8px;
+    text-align: left;
+  }
+  .buy_block {
+    margin-left: 0px;
+  }
+  .dil_time {
+    text-align: left;
+  }
+  .card {
+    margin-right: 0px;
+  }
+}
+@media (min-width: 1024px) and (max-width: 1440px) {
+ .page_content {
+    margin: 0px;
+    justify-content: center;
+  }
+  .product_info > img {
+    width: 380px;
+    height: 380px;
+  }
+  .product_info {
+    align-items: center;
+    flex-direction: column;
+  }
+  .product_specifications {
+    margin: 0px;
+  }
+
+  .specs {
+    gap: 4px;
+    margin-top: 8px;
+    font-size: 16px;
+  }
+  .specs_description {
+    font-size: 20px;
+  }
+  .description_text {
+    font-size: 16px;
+    padding: 8px;
+    text-align: left;
+  }
+  .buy_block {
+    margin-left: 0px;
+  }
+  .dil_time {
+    text-align: left;
+  }
+  .card {
+    margin-right: 0px;
+  }
 }
 </style>
 
@@ -256,7 +386,6 @@ export default {
       setTimeout(() => {
         this.update = true;
       }, 300);
-      
     });
     this.getProduct();
     this.getProducts();

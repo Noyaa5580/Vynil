@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="content">
     <div class="slider">
       <div class="slider_line" id="slider">
         <div class="item">
@@ -46,9 +46,10 @@
 </template>
 
 <style scoped>
+
 .slider {
   width: 100%;
-  height: 639px;
+  height: 640px;
   overflow: hidden;
 }
 
@@ -64,7 +65,7 @@
 
 .item {
   width: 100%;
-  height: 639px;
+  height: 600px;
 }
 
 .item>img{width: 100%; }

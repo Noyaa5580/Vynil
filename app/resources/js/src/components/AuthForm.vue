@@ -200,8 +200,7 @@ export default {
           this.$router.push({ path: "/" });
         }
         console.log(error);
-      } catch (error) {
-      }
+      } catch (error) {}
     },
     async auth() {
       try {
@@ -257,5 +256,20 @@ input:focus {
   margin-top: 6px;
   text-decoration: underline;
   cursor: pointer;
+}
+@media (min-width: 320px) and (max-width: 767px) {
+  .container {
+    width: 300px;
+  }
+  .form_name {
+    font-size: 24px;
+  }
+  .have_acc {
+    text-align: center;
+  }
+}
+@media (min-width: 768px) and (max-width: 1023px) {
+}
+@media (min-width: 1024px) and (max-width: 1440px) {
 }
 </style>
